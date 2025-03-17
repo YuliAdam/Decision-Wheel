@@ -45,7 +45,7 @@ export class Router {
     this.navigate(path);
   }
   private getCurrentPath(): string {
-    if (window.location.hash.) {
+    if (window.location.hash) {
       return window.location.hash.slice(1);
     } else {
       return window.location.pathname.slice(1);
