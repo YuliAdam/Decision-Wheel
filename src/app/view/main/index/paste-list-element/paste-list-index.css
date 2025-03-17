@@ -1,0 +1,24 @@
+.index_overflow {
+    position: fixed;
+    top: 0;
+    left: auto;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(24, 28, 41, 0.8);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.index_paste-list {
+    width: 70%;
+    height: 50%;
+    box-shadow: var(--box-shadow);
+    background: rgba(166, 94, 218, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: var(--border-radius-btn);
+}

@@ -1,0 +1,31 @@
+{
+  "COLORS": {
+    "SECTION_COLORS": [
+      "rgb(14,77,148)",
+      "rgb(14,50,167)",
+      "rgb(88,159,211)",
+      "rgb(79,151,163)",
+      "rgb(19,30,58)",
+      "rgb(19,30,58)",
+      "rgb(0,49,82)",
+      "rgb(77,81,110)",
+      "rgb(149,200,217)",
+      "rgb(70,130,180)",
+      "rgb(102,148,246)",
+      "rgb(47, 233, 233)",
+      "rgb(0,141,203)",
+      "rgb(0,128,255)",
+      "rgb(28,42,81)",
+      "rgb(115,194,251)",
+      "rgb(15,82,186)",
+      "rgb(1,0,128)",
+      "rgb(0, 103, 112)"
+    ],
+    "PRIMARY_COLOR": "#ffffff",
+    "BORDER_COLOR": "#9202f8"
+  },
+  "FONT": {
+    "FONT": " 12px Inter, Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
+    "TEXT_ALIGN": "center"
+  }
+}

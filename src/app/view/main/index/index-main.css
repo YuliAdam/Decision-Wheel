@@ -1,0 +1,7 @@
+.main_index{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 720px;
+}

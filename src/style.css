@@ -1,0 +1,61 @@
+:root {
+    --primary-color: #cb8afa;
+    --primary-color-hover: #bb5cff;
+    --primary-color-white: #ffffff;
+    --primary-color-dark: #9202f8;
+    --primary-color-light: #cb8afa;
+    --primary-color-more-dark: #2b004a;
+
+
+    --text-color: var(--primary-color-white);
+    --text-color-footer: var(--primary-color-dark);
+    --box-shadow: var(--primary-color-dark) 0px 5px 15px;
+    --box-shadow-white: var(--primary-color-white) 0px 5px 15px;
+    --section-border: 2px solid var(--text-color);
+    --title-font: Inter, Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+    --border-btn: 2px solid var(--primary-color-dark);
+
+    --border-radius-btn: 10px;
+}
+
+html {
+    background-color: var(--primary-color);
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    position: relative;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    width: 100vw;
+    min-height: 100vh;
+    max-width: 1280px;
+    margin: auto;
+    align-content: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.opacity {
+    opacity: 0 !important;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+::placeholder {
+    color: var(--primary-color-light);
+}
+
+*:focus {
+    outline: none;
+}
+
+.display-none {
+    display: none !important;
+}

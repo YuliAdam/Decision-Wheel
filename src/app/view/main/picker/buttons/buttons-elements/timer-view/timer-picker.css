@@ -1,0 +1,42 @@
+.picker_timer-wrapper {
+    margin: 5px;
+    height: 100%;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius-btn);
+    transition: all 0.25s ease-in;
+    display: flex;
+    justify-content: space-between;
+    max-width: 104px;
+}
+
+.timer_img {
+    padding: 0.5em 0.5em;
+    width: 30%;
+    height: auto;
+}
+
+.timer_input {
+    margin: 5px;
+    background-color: var(--primary-color-dark);
+    color: var(--primary-color-white);
+    font: var(--title-font);
+    font-size: 1.5vw;
+    border: transparent;
+    box-shadow: var(--box-shadow-white);
+    height: calc(100% - 10px);
+    width: 45px;
+}
+
+@media screen and (min-width: 1280px) {
+
+    .timer_input {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .timer_input {
+        font-size: 13.5px;
+    }
+}

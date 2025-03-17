@@ -1,0 +1,32 @@
+.picker_start {
+    background: none;
+    padding: 0.5em 0.5em;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    font-family: var(--title-font);
+    font-size: 1.5vw;
+    color: var(--text-color);
+    margin: 5px;
+    width: calc(100% - 10px);
+    border-color: transparent;
+    border-radius: var(--border-radius-btn);
+    transition: all 0.25s ease-in;
+}
+
+.picker_start:hover {
+    box-shadow: var(--box-shadow-white);
+}
+
+@media screen and (min-width: 1280px) {
+
+    .picker_start {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .picker_start {
+        font-size: 13.5px;
+    }
+}

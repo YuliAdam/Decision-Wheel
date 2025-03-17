@@ -1,0 +1,14 @@
+.paste-list_text {
+    display: block;
+    box-sizing: content-box;
+    resize: none;
+    height: 100%;
+    width: calc(100% - 1.5em);
+    flex-grow: 1;
+    margin: 0.5em;
+    text-align: start;
+    background-color: var(--primary-color-more-dark);
+    font-family: var(--title-font);
+    font-size: 1.5vw;
+    color: var(--text-color);
+}

@@ -1,0 +1,17 @@
+.ul_item{
+    display: block;
+    box-sizing: content-box;
+    padding: 0.5em 0.5em;
+    box-shadow: var(--box-shadow);
+    margin: 5px 0;
+    border-color: transparent;
+    border-radius: var(--border-radius-btn);
+    height: 2.563vw;
+    transition: all 0.25s ease-in;
+}
+.item_wrap{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

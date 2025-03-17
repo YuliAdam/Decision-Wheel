@@ -1,0 +1,43 @@
+.index_btn{
+    background: none;
+    padding: 0.5em 0.5em;
+    box-shadow: var(--box-shadow);
+    transition: 0.25s;
+    cursor: pointer;
+    font-family: var(--title-font);
+    font-size: 1.5vw;
+    color: var(--text-color);
+    margin: 5px;
+    width: 100%;
+    border-color: transparent;
+    border-radius: var(--border-radius-btn);
+    transition: all 0.25s ease-in;
+}
+
+.index_btn:hover{
+    box-shadow: var(--box-shadow-white);
+}
+
+@media screen and (min-width: 1280px) {
+    .index_btn {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .index_btn {
+        font-size: 13.5px;
+    }
+}
+
+.btn_wrap{
+display: flex;
+width: 100%;
+}
+
+.btn_wrap :first-child{
+    margin-left: 0;
+}
+.btn_wrap :last-child{
+    margin-right: 0;
+}

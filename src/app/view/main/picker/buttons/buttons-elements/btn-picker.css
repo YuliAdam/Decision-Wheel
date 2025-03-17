@@ -1,0 +1,49 @@
+.picker_back,
+.picker_volume {
+    background: none;
+    box-shadow: var(--box-shadow);
+    transition: 0.25s;
+    cursor: pointer;
+    font-family: var(--title-font);
+    font-size: 1.5vw;
+    color: var(--text-color);
+    margin: 5px;
+    border-color: transparent;
+    border-radius: var(--border-radius-btn);
+    transition: all 0.25s ease-in;
+}
+
+.picker_back {
+    padding: 0.5em 0.5em;
+}
+
+.picker_volume {
+    padding: 0.5em 0.5em;
+    height: 100%;
+}
+
+.volume_img {
+    height: 100%;
+    width: auto;
+}
+
+.picker_back:hover,
+.picker_volume:hover {
+    box-shadow: var(--box-shadow-white);
+}
+
+@media screen and (min-width: 1280px) {
+
+    .picker_back,
+    .picker_volume {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .picker_back,
+    .picker_volume {
+        font-size: 13.5px;
+    }
+}

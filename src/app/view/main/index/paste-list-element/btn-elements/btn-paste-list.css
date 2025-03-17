@@ -1,0 +1,42 @@
+.paste-list_wrapper {
+    width: 100%;
+    display: flex;
+}
+
+.paste-list_cancel,
+.paste-list_confirm {
+    background-color: var(--primary-color);
+    padding: 0.5em 0.5em;
+    box-shadow: var(--box-shadow);
+    transition: 0.25s;
+    cursor: pointer;
+    font-family: var(--title-font);
+    font-size: 1.5vw;
+    color: var(--text-color);
+    margin: 5px;
+    width: 100%;
+    border-color:transparent;
+    border-radius: var(--border-radius-btn);
+    transition: all 0.25s ease-in;
+}
+
+.paste-list_cancel:hover,
+.paste-list_confirm:hover {
+    box-shadow: var(--box-shadow-white);
+}
+
+@media screen and (min-width: 1280px) {
+
+    .paste-list_cancel,
+    .paste-list_confirm {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .paste-list_cancel,
+    .paste-list_confirm {
+        font-size: 13.5px;
+    }
+}
