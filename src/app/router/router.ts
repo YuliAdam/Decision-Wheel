@@ -33,7 +33,7 @@ export class Router {
     } else {
       route.callBack();
       if (addToHistory) {
-        window.history.pushState({}, "", `/${url}`);
+        window.history.pushState({}, "", `/#${url}`);
       }
     }
   }
