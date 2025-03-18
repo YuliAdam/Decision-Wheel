@@ -42,6 +42,21 @@ export class PasteListEventManager {
         Object.values(this.eventManager)[i](parentEl, el, textarea, localStoge);
       }
     });
+    if (parentEl) {
+      this.overClickEvent(parentEl, textarea, localStoge);
+    }
+  }
+
+  private overClickEvent(
+    element: HTMLElement,
+    textarea: HTMLElement | null,
+    localStoge: LocalStoge,
+  ) {
+    element.addEventListener("click", (e) => {
+      if (e.target !== textarea) {
+        PasteListEventManager.closePasteList(element, textarea, localStoge);
+      }
+    });
   }
 
   private cancelBtnEvent(
@@ -51,14 +66,22 @@ export class PasteListEventManager {
     localStoge: LocalStoge,
   ) {
     cancelBtn.addEventListener("click", () => {
-      if (parentEl && localStoge) {
-        parentEl.classList.add("display-none");
-        document.body.classList.remove("overflow-hidden");
-      }
-      PasteListEventManager.cancelTexareaValue(textarea);
+      PasteListEventManager.closePasteList(parentEl, textarea, localStoge);
     });
   }
-  
+
+  private static closePasteList(
+    parentEl: HTMLElement | null,
+    textarea: HTMLElement | null,
+    localStoge: LocalStoge,
+  ) {
+    if (parentEl && localStoge) {
+      parentEl.classList.add("display-none");
+      document.body.classList.remove("overflow-hidden");
+    }
+    PasteListEventManager.cancelTexareaValue(textarea);
+  }
+
   private confirmBtnEvent(
     parentEl: HTMLElement | null,
     confirmBtn: HTMLElement,

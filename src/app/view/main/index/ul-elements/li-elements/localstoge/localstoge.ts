@@ -79,4 +79,16 @@ export class LocalStoge {
   public getLocalStogeTextFile(): string {
     return `{"list": ${JSON.stringify(this.getLocalStogeList())}, "lastId": ${JSON.stringify(this.getLocalStogeLastId())}}`;
   }
+
+  public validateOption(): IOption[] {
+    const list: IOption[] = this.getLocalStogeList();
+    return list.filter((el) => {
+      return (
+        el.option &&
+        el.option.length > 0 &&
+        el.weight &&
+        parseInt(el.weight) > 0
+      );
+    });
+  }
 }

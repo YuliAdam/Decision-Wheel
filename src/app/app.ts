@@ -18,7 +18,6 @@ export class App {
     this.localStoge = new LocalStoge();
     this.router = new Router(this.createRoutes());
     this.createView(this.localStoge, this.router);
-    this.router.navigate('')
   }
   private createView(localStoge: LocalStoge, router: Router): void {
     const headerView: HTMLElement | null = new HeaderView().getHTMLElement();

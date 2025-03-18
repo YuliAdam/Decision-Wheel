@@ -74,7 +74,7 @@ export class WheelPickerView extends View {
   ) {
     const initDeg: number = 0;
     const finishDeg: number = 360;
-    const option: IOption[] = localStoge.getLocalStogeList();
+    const option: IOption[] = localStoge.validateOption();
     const numOption = option.length;
     const optionColors: string[] = WheelPickerView.getRandomColors(numOption);
     const optionDegs: Array<{ startDeg: number; endDeg: number }> = [];

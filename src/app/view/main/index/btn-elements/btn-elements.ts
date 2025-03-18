@@ -9,7 +9,7 @@ import { UlElement } from "../ul-elements/ul-element";
 import { BtnEventManager } from "../btn-event-manager/btn-event-manager";
 import { LocalStoge } from "../ul-elements/li-elements/localstoge/localstoge";
 import { Router } from "../../../../router/router";
-
+import { DialogView } from "../main-dialog/main-dialog";
 
 const CssClasses: { indexBtn: string[]; btn_wrap: string[] } = {
   indexBtn: ["index_btn"],
@@ -57,9 +57,9 @@ const buttonsParams: {
 };
 
 export class BtnIndexElements extends ElementsChildren {
-  constructor(ulComponent: UlElement, localStoge: LocalStoge,router:Router) {
+  constructor(ulComponent: UlElement, localStoge: LocalStoge, router: Router) {
     super();
-    this.configComponents(this.childArray, ulComponent, localStoge,router);
+    this.configComponents(this.childArray, ulComponent, localStoge, router);
   }
 
   protected getElementsArr(): Array<HTMLElement | null> {
@@ -89,6 +89,10 @@ export class BtnIndexElements extends ElementsChildren {
     const startBtnEl: HTMLElement | null = new ButtonView(
       buttonsParams.startBtnParams,
     ).getHTMLElement();
+    const dialogEl: HTMLElement | null = new DialogView().getHTMLElement();
+    if (startBtnEl && dialogEl) {
+      startBtnEl.append(dialogEl);
+    }
     return [addBtnEl, pasteBtnEl, clearBtnEl, wrapBtnEl, startBtnEl];
   }
 
@@ -102,8 +106,8 @@ export class BtnIndexElements extends ElementsChildren {
     childArray: Array<HTMLElement | null>,
     ulComponent: UlElement,
     localStoge: LocalStoge,
-    router:Router
+    router: Router,
   ) {
-    new BtnEventManager(childArray, ulComponent, localStoge,router);
+    new BtnEventManager(childArray, ulComponent, localStoge, router);
   }
 }

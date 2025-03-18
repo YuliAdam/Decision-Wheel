@@ -11,23 +11,28 @@ export const Pages: { MAIN: string; PICKER: string; NOT_FOUND: string } = {
 
 export class Router {
   private routes;
+
   constructor(routes: IRoutes[]) {
     this.routes = routes;
+
     document.addEventListener("DOMContentLoaded", () => {
       const path = this.getCurrentPath();
-      this.navigate(path);
+      this.navigate(path, false);
     });
     window.addEventListener("popstate", this.browserChangeHundler.bind(this));
     window.addEventListener("hashchange", this.browserChangeHundler.bind(this));
   }
 
-  public navigate(url: string) {
+  public navigate(url: string, addToHistory: boolean = true) {
     const route = this.routes.find((item) => item.path === url);
     if (!route) {
       this.redirectToNotFound();
       return;
     } else {
       route.callBack();
+      if (addToHistory) {
+        window.history.pushState({}, "", `/${url}`);
+      }
     }
   }
 
@@ -42,7 +47,7 @@ export class Router {
 
   private browserChangeHundler(): void {
     const path = this.getCurrentPath();
-    this.navigate(path);
+    this.navigate(path,false);
   }
   private getCurrentPath(): string {
     if (window.location.hash) {

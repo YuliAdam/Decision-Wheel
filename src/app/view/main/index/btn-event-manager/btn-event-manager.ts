@@ -217,7 +217,25 @@ export class BtnEventManager {
     router: Router,
   ) {
     if (el && ulComponent && localStoge) {
-      el.addEventListener("click", () => router.navigate("decision-picker"));
+      el.addEventListener("click", () => {
+        console.log("show");
+        const list: IOption[] = localStoge.validateOption();
+        if (list.length > 1) {
+          router.navigate("decision-picker");
+        } else {
+          const dialog = el.children[0];
+          if (dialog) {
+            const dialog: Element = el.children[0];
+            if (
+              dialog instanceof HTMLDialogElement &&
+              !dialog.classList.contains("open")
+            ) {
+              console.log("show1");
+              dialog.showModal();
+            }
+          }
+        }
+      });
     }
   }
 }

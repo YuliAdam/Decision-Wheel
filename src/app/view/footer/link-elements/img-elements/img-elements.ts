@@ -9,7 +9,7 @@ import { ImgView } from "../../../element-view/img-view";
 const imgAditionalParams: { gitHub: AditionalParam; rsSchool: AditionalParam } =
   {
     gitHub: {
-      src: "gitHub-logo.png",
+      src: "github-logo.svg",
       alt: "GitHub logo",
     },
     rsSchool: {
