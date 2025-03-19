@@ -39,11 +39,13 @@ export class StratPickerView extends ButtonView {
     wheel: WheelPickerView,
   ) {
     startEl.addEventListener("click", () => {
-      const overDiv: Element | null = startEl.nextElementSibling;
-      if (overDiv) {
-        overDiv.classList.remove("display-none");
-        wheel.spin(audio, overDiv);
-        audio.playAudio();
+      if (wheel.time > 4) {
+        const overDiv: Element | null = startEl.nextElementSibling;
+        if (overDiv) {
+          overDiv.classList.remove("display-none");
+          wheel.spin(audio, overDiv);
+          audio.playAudio();
+        }
       }
     });
   }

@@ -19,6 +19,7 @@ const CssClasses: {
   timerInput: ["timer_input"],
 };
 const INIT_TIMER: number = 15;
+const MIN_TIMER: number = 5;
 
 export class TimerPickerView extends View {
   constructor(wheel: WheelPickerView) {
@@ -62,8 +63,10 @@ export class TimerPickerView extends View {
   private addChangeTimeEvent(el: InputView, wheel: WheelPickerView) {
     const inputEl: HTMLElement | null = el.getHTMLElement();
     if (inputEl && inputEl instanceof HTMLInputElement) {
+      inputEl.setAttribute("type", "number");
+      inputEl.min = `${MIN_TIMER}`;
       wheel.time = parseInt(inputEl.value);
-      inputEl.addEventListener("keyup", () => {
+      inputEl.addEventListener("input", () => {
         wheel.time = parseInt(inputEl.value);
       });
     }

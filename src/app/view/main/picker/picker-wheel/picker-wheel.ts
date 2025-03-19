@@ -1,8 +1,6 @@
 import "./picker-wheel.css";
 import WHEEL_PARAMS from "./picker-wheel-property.json";
-import type {
-  BaseComponentParam,
-} from "../../../../../util/base-component";
+import type { BaseComponentParam } from "../../../../../util/base-component";
 import { getRandom } from "../../../../../util/function/random-function";
 import { View } from "../../../view";
 import { IOption } from "../../index/ul-elements/li-elements/item_view/item-children-view";

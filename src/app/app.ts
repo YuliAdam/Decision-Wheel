@@ -8,13 +8,15 @@ import { Pages, Router, type IRoutes } from "./router/router";
 import { NotFoundView } from "./view/main/not-found/not-found";
 
 export class App {
-  private main: MainView | null;
+  private main: MainView;
   private index: IndexView | null;
+  private notFound: NotFoundView | null;
   private router: Router;
   private localStoge: LocalStoge;
   constructor() {
-    this.main = null;
+    this.main = new MainView();
     this.index = null;
+    this.notFound = null;
     this.localStoge = new LocalStoge();
     this.router = new Router(this.createRoutes());
     this.createView(this.localStoge, this.router);
@@ -22,9 +24,9 @@ export class App {
   private createView(localStoge: LocalStoge, router: Router): void {
     const headerView: HTMLElement | null = new HeaderView().getHTMLElement();
     this.index = new IndexView(localStoge, router);
-    this.main = new MainView();
+    this.notFound = new NotFoundView(router);
     const footerView: HTMLElement | null = new FooterView().getHTMLElement();
-    if(this.main.getHTMLElement()){
+    if (this.main.getHTMLElement()) {
       App.appendElements([headerView, this.main.getHTMLElement(), footerView]);
     }
   }
@@ -32,7 +34,7 @@ export class App {
   private static appendElements(el: Array<HTMLElement | null>): void {
     el.forEach((e) => {
       if (e instanceof Node) {
-        console.log(e)
+        console.log(e);
         document.body.append(e);
       }
     });
@@ -51,11 +53,12 @@ export class App {
       {
         path: Pages.PICKER,
         callBack: () => {
-          console.log('picker')
+          console.log("picker");
           if (this.main) {
-            this.main.setContent(new PicherView(this.localStoge, this.router).viewComponent);
+            this.main.setContent(
+              new PicherView(this.localStoge, this.router).viewComponent,
+            );
           }
-         
         },
       },
       {
@@ -69,8 +72,8 @@ export class App {
       {
         path: Pages.NOT_FOUND,
         callBack: () => {
-          if (this.main && this.index) {
-            this.main.setContent(new NotFoundView().viewComponent);
+          if (this.main && this.notFound) {
+            this.main.setContent(this.notFound.viewComponent);
           }
         },
       },
