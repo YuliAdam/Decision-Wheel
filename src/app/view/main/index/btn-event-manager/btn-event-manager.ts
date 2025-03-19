@@ -170,6 +170,7 @@ export class BtnEventManager {
         const input = document.createElement("input");
         form.append(input);
         input.type = "file";
+        input.accept = '.json'
         input.id = "files";
         input.formMethod = "post";
         input.addEventListener("change", (e) => {
