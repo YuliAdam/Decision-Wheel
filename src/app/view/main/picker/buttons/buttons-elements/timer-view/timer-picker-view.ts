@@ -45,6 +45,12 @@ export class TimerPickerView extends View {
     };
     const timerImg = new ImgView(timerImgBaseParam, timerImgAditionalParam);
 
+    const timerFormBaseParam: BaseComponentParam = {
+      tag: "form",
+    };
+
+    const timerFormInput = new BaseComponent(timerFormBaseParam);
+
     const timerInputBaseParam: BaseComponentParam = {
       classList: CssClasses.timerInput,
     };
@@ -55,9 +61,13 @@ export class TimerPickerView extends View {
       timerInputBaseParam,
       timerInputAditionalParam,
     );
+    const timerInputEl = timerInput.getHTMLElement();
+    if (timerInputEl) {
+      timerFormInput.appendChildren([timerInputEl]);
+    }
     timerInput.setValue(`${INIT_TIMER}`);
     this.addChangeTimeEvent(timerInput, wheel);
-    return [timerImg.viewComponent, timerInput.viewComponent];
+    return [timerImg.viewComponent, timerFormInput];
   }
 
   private addChangeTimeEvent(el: InputView, wheel: WheelPickerView) {
@@ -65,10 +75,24 @@ export class TimerPickerView extends View {
     if (inputEl && inputEl instanceof HTMLInputElement) {
       inputEl.setAttribute("type", "number");
       inputEl.min = `${MIN_TIMER}`;
+      inputEl.required = true;
       wheel.time = parseInt(inputEl.value);
-      inputEl.addEventListener("input", () => {
+      const form: Element | null = inputEl.parentElement;
+      if (form && form instanceof HTMLFormElement) {
+        this.addEventSubmitForm(form);
+      }
+      inputEl.addEventListener("keyup", () => {
         wheel.time = parseInt(inputEl.value);
       });
+      inputEl.addEventListener("submit", (e) => {
+        e.preventDefault();
+      });
     }
+  }
+
+  private addEventSubmitForm(form: HTMLFormElement) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
   }
 }
