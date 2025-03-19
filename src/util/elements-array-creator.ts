@@ -6,3 +6,4 @@ export abstract class ElementsChildren {
 
   protected abstract getElementsArr(): Array<HTMLElement | null>;
 }
+

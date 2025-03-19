@@ -10,6 +10,7 @@ import { ImgView } from "../../../../element-view/img-view";
 import { TimerPickerView } from "./timer-view/timer-picker-view";
 import { AudioView } from "../../audio/audio";
 import { Router } from "../../../../../router/router";
+import { WheelPickerView } from "../../picker-wheel/picker-wheel";
 
 const CssClasses: { back: string[]; volume: string[] } = {
   back: ["picker_back"],
@@ -23,16 +24,20 @@ const buttonsParams: { back: BaseComponentParam; volume: BaseComponentParam } =
   };
 
 export class ButtonsPickerElements extends ElementsChildren {
-  constructor(audio: AudioView, router: Router) {
+  constructor(audio: AudioView, wheel: WheelPickerView, router: Router) {
     super();
-    this.childArray = this.createChildren(audio, router);
+    this.childArray = this.createChildren(audio, wheel, router);
   }
 
   protected getElementsArr(): Array<HTMLElement | null> {
     return [];
   }
 
-  private createChildren(audio: AudioView, router: Router) {
+  private createChildren(
+    audio: AudioView,
+    wheel: WheelPickerView,
+    router: Router,
+  ) {
     const backBtn: HTMLElement | null = new ButtonView(
       buttonsParams.back,
     ).getHTMLElement();
@@ -53,7 +58,7 @@ export class ButtonsPickerElements extends ElementsChildren {
         ButtonsPickerElements.backCallback(router, backBtn);
       }
     }
-    const timer: HTMLElement | null = new TimerPickerView().getHTMLElement();
+    const timer: HTMLElement | null = new TimerPickerView(wheel).getHTMLElement();
     return [backBtn, volumeBtn, timer];
   }
 

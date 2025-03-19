@@ -19,17 +19,15 @@ export class Router {
       const path = this.getCurrentPath();
       this.navigate(path, false);
     });
-
     window.addEventListener("popstate", this.browserChangeHundler.bind(this));
+    window.addEventListener("hashchange", this.browserChangeHundler.bind(this));
   }
 
   public navigate(url: string, addToHistory: boolean = true) {
-    if (url === "") {
-      url = Pages.MAIN;
-    }
     const route = this.routes.find((item) => item.path === url);
     if (!route) {
       this.redirectToNotFound();
+      return;
     } else {
       route.callBack();
       if (addToHistory) {
@@ -39,20 +37,23 @@ export class Router {
   }
 
   private redirectToNotFound(): void {
-    const routeNotFound = this.routes.find(
+    const routNotFound = this.routes.find(
       (item) => item.path === Pages.NOT_FOUND,
     );
-    if (routeNotFound) {
-      this.navigate(routeNotFound.path);
+    if (routNotFound) {
+      this.navigate(routNotFound.path);
     }
   }
 
   private browserChangeHundler(): void {
     const path = this.getCurrentPath();
-    this.navigate(path, false);
+    this.navigate(path,false);
   }
-
   private getCurrentPath(): string {
-    return window.location.pathname.slice(1) || Pages.MAIN;
+    if (window.location.hash) {
+      return window.location.hash.slice(1);
+    } else {
+      return window.location.pathname.slice(1);
+    }
   }
 }

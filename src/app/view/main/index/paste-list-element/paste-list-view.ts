@@ -12,7 +12,7 @@ const CssClasses: {
   overflow: string[];
   pasteList: string[];
 } = {
-  overflow: ["index_overflow", "display-none"],
+  overflow: ["index_overflow"],
   pasteList: ["index_paste-list"],
 };
 

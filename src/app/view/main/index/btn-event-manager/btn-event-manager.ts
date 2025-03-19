@@ -3,6 +3,7 @@ import { UlElement } from "../ul-elements/ul-element";
 import { ItemElements } from "../ul-elements/li-elements/item-elements";
 import { IOption } from "../ul-elements/li-elements/item_view/item-children-view";
 import { Router } from "../../../../router/router";
+import { PasteListView } from "../paste-list-element/paste-list-view";
 
 export class BtnEventManager {
   constructor(
@@ -126,12 +127,13 @@ export class BtnEventManager {
   ) {
     if (component && router && localStoge) {
       component.addEventListener("click", () => {
-        const modal: ChildNode | null =
-          ulComponent.childArray[0]?.previousSibling ?? null;
-        if (modal instanceof HTMLElement) {
           document.body.classList.add("overflow-hidden");
-          modal.classList.remove("display-none");
-        }
+          const pasteListEl: HTMLElement | null = new PasteListView(
+            localStoge,
+          ).getHTMLElement();
+          if (pasteListEl) {
+            ulComponent.childArray[0]?.before(pasteListEl);
+          }
       });
     }
   }

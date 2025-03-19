@@ -17,7 +17,7 @@ const CssClasses: { picker: string[] } = {
 export class PicherView extends View {
   private resultPickerView: BaseComponent;
   private buttonsChildView: BaseComponent;
-  private wheelPickerView: BaseComponent;
+  private wheelPickerView: WheelPickerView | null;
   constructor(localStoge: LocalStoge, router: Router) {
     const pickerParam: BaseComponentParam = {
       classList: CssClasses.picker,
@@ -25,23 +25,24 @@ export class PicherView extends View {
     super(pickerParam);
     this.resultPickerView = new BaseComponent({});
     this.buttonsChildView = new BaseComponent({});
-    this.wheelPickerView = new BaseComponent({});
+    this.wheelPickerView = null;
     this.configComponent(localStoge, router);
   }
 
   private configComponent(localStoge: LocalStoge, router: Router) {
     const audio: AudioView = new AudioView();
-    this.buttonsChildView = new ButtonPickerView(audio, router).viewComponent;
     this.resultPickerView = new ResultPickerView().viewComponent;
-    this.wheelPickerView = new WheelPickerView(
-      localStoge,
-      this.resultPickerView,
+    this.wheelPickerView = new WheelPickerView(localStoge);
+    this.buttonsChildView = new ButtonPickerView(
+      audio,
+      this.wheelPickerView,
+      router,
     ).viewComponent;
     this.viewComponent.appendChildComponents([
       audio.viewComponent,
       this.buttonsChildView,
       this.resultPickerView,
-      this.wheelPickerView,
+      this.wheelPickerView.viewComponent,
     ]);
   }
 }

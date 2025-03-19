@@ -39,8 +39,9 @@ export class DialogView extends View {
   }
 
   private static closeDialog(el: BaseComponent): void {
-    if (el.getElement()) {
-      el.getElement()?.addEventListener("click", () => {
+    const overDiv: HTMLElement | null = el.getElement();
+    if (overDiv) {
+      overDiv.addEventListener("click", () => {
         const dialog: HTMLElement | null = el.getParentComponent();
         if (dialog && dialog instanceof HTMLDialogElement) {
           dialog.classList.add("open");

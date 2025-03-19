@@ -1,4 +1,4 @@
-import './timer-picker.css'
+import "./timer-picker.css";
 import {
   AditionalParam,
   BaseComponent,
@@ -7,6 +7,7 @@ import {
 import { ImgView } from "../../../../../element-view/img-view";
 import { InputView } from "../../../../../element-view/input-view";
 import { View } from "../../../../../view";
+import { WheelPickerView } from "../../../picker-wheel/picker-wheel";
 
 const CssClasses: {
   timerWrapper: string[];
@@ -20,20 +21,20 @@ const CssClasses: {
 const INIT_TIMER: number = 15;
 
 export class TimerPickerView extends View {
-  constructor() {
+  constructor(wheel: WheelPickerView) {
     const timerWrapper: BaseComponentParam = {
       classList: CssClasses.timerWrapper,
     };
     super(timerWrapper);
-    this.configView();
+    this.configView(wheel);
   }
 
-  protected configView(): void {
-    const timerElements: Array<BaseComponent> = this.createElements();
+  protected configView(wheel: WheelPickerView): void {
+    const timerElements: Array<BaseComponent> = this.createElements(wheel);
     this.viewComponent.appendChildComponents(timerElements);
   }
 
-  private createElements(): Array<BaseComponent> {
+  private createElements(wheel: WheelPickerView): Array<BaseComponent> {
     const timerImgBaseParam: BaseComponentParam = {
       classList: CssClasses.timerImg,
     };
@@ -54,6 +55,17 @@ export class TimerPickerView extends View {
       timerInputAditionalParam,
     );
     timerInput.setValue(`${INIT_TIMER}`);
+    this.addChangeTimeEvent(timerInput, wheel);
     return [timerImg.viewComponent, timerInput.viewComponent];
+  }
+
+  private addChangeTimeEvent(el: InputView, wheel: WheelPickerView) {
+    const inputEl: HTMLElement | null = el.getHTMLElement();
+    if (inputEl && inputEl instanceof HTMLInputElement) {
+      wheel.time = parseInt(inputEl.value);
+      inputEl.addEventListener("keyup", () => {
+        wheel.time = parseInt(inputEl.value);
+      });
+    }
   }
 }

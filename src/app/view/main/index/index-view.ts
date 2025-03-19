@@ -1,7 +1,6 @@
 import "./index-main.css";
 import { View } from "../../view";
 import { LocalStoge } from "./ul-elements/li-elements/localstoge/localstoge";
-import { PasteListView } from "./paste-list-element/paste-list-view";
 import { UlElement } from "./ul-elements/ul-element";
 import { BtnIndexElements } from "./btn-elements/btn-elements";
 import { Router } from "../../../router/router";
@@ -18,12 +17,6 @@ export class IndexView extends View {
   }
 
   private configComponent(localStoge: LocalStoge, router: Router): void {
-    const pasteListEl: HTMLElement | null = new PasteListView(
-      localStoge,
-    ).getHTMLElement();
-    if (pasteListEl) {
-      this.viewComponent.appendChildren([pasteListEl]);
-    }
     const childUl: UlElement = new UlElement(localStoge);
     childUl.childArray.forEach((el) => {
       if (el) {

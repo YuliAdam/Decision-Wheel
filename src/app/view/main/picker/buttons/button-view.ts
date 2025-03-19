@@ -8,6 +8,7 @@ import { ButtonsPickerElements } from "./buttons-elements/buttonsElement";
 import { StratPickerView } from "./start/picker-start-view";
 import { AudioView } from "../audio/audio";
 import { Router } from "../../../../router/router";
+import { WheelPickerView } from "../picker-wheel/picker-wheel";
 
 const CssClasses: {
   pickerWrapper: string[];
@@ -20,15 +21,19 @@ const CssClasses: {
 };
 
 export class ButtonPickerView extends View {
-  constructor(audio: AudioView, router: Router) {
+  constructor(audio: AudioView, wheel: WheelPickerView, router: Router) {
     const btnpickerWrapperParam: BaseComponentParam = {
       classList: CssClasses.pickerWrapper,
     };
     super(btnpickerWrapperParam);
-    this.configComponent(audio, router);
+    this.configComponent(audio, wheel, router);
   }
 
-  private configComponent(audio: AudioView, router: Router): void {
+  private configComponent(
+    audio: AudioView,
+    wheel: WheelPickerView,
+    router: Router,
+  ): void {
     const blockButtonWrapper: HTMLElement | null = new BaseComponent({
       classList: CssClasses.block,
     }).getElement();
@@ -36,10 +41,13 @@ export class ButtonPickerView extends View {
       classList: CssClasses.btnWrapper,
     }).getElement();
     const childArray: Array<HTMLElement | null> = new ButtonsPickerElements(
-      audio,router
+      audio,
+      wheel,
+      router,
     ).childArray;
     const startEl: HTMLElement | null = new StratPickerView(
       audio,
+      wheel,
       blockButtonWrapper,
     ).viewComponent.getElement();
     if (btnWrapper && startEl && blockButtonWrapper) {

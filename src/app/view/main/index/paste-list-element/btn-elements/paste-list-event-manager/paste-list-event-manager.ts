@@ -8,7 +8,6 @@ export class PasteListEventManager {
     cancel: (
       parentEl: HTMLElement | null,
       el: HTMLElement,
-      textarea: HTMLElement | null,
       localStoge: LocalStoge,
     ) => void;
     confirm: (
@@ -37,11 +36,10 @@ export class PasteListEventManager {
     textarea: HTMLElement | null,
     localStoge: LocalStoge,
   ) {
-    btnElements.forEach((el, i) => {
-      if (el) {
-        Object.values(this.eventManager)[i](parentEl, el, textarea, localStoge);
-      }
-    });
+    if (btnElements[0] && btnElements[1]) {
+      this.eventManager.cancel(parentEl, btnElements[0], localStoge);
+      this.eventManager.confirm(parentEl, btnElements[1], textarea, localStoge);
+    }
     if (parentEl) {
       this.overClickEvent(parentEl, textarea, localStoge);
     }
@@ -54,7 +52,7 @@ export class PasteListEventManager {
   ) {
     element.addEventListener("click", (e) => {
       if (e.target !== textarea) {
-        PasteListEventManager.closePasteList(element, textarea, localStoge);
+        PasteListEventManager.cancelPasteList(element, localStoge);
       }
     });
   }
@@ -62,24 +60,21 @@ export class PasteListEventManager {
   private cancelBtnEvent(
     parentEl: HTMLElement | null,
     cancelBtn: HTMLElement,
-    textarea: HTMLElement | null,
     localStoge: LocalStoge,
   ) {
     cancelBtn.addEventListener("click", () => {
-      PasteListEventManager.closePasteList(parentEl, textarea, localStoge);
+      PasteListEventManager.cancelPasteList(parentEl, localStoge);
     });
   }
 
-  private static closePasteList(
+  private static cancelPasteList(
     parentEl: HTMLElement | null,
-    textarea: HTMLElement | null,
     localStoge: LocalStoge,
   ) {
     if (parentEl && localStoge) {
-      parentEl.classList.add("display-none");
+      parentEl.remove();
       document.body.classList.remove("overflow-hidden");
     }
-    PasteListEventManager.cancelTexareaValue(textarea);
   }
 
   private confirmBtnEvent(
@@ -108,13 +103,8 @@ export class PasteListEventManager {
         parentEl.classList.add("display-none");
         document.body.classList.remove("overflow-hidden");
       }
-      PasteListEventManager.cancelTexareaValue(textarea);
+      PasteListEventManager.cancelPasteList(parentEl, localStoge);
     });
-  }
-  public static cancelTexareaValue(textarea: HTMLElement | null): void {
-    if (textarea && textarea instanceof HTMLTextAreaElement) {
-      textarea.value = "";
-    }
   }
 
   private static validateTextarea(textarea: HTMLTextAreaElement): IOption[] {
