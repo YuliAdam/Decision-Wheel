@@ -127,13 +127,14 @@ export class BtnEventManager {
   ) {
     if (component && router && localStoge) {
       component.addEventListener("click", () => {
-          document.body.classList.add("overflow-hidden");
-          const pasteListEl: HTMLElement | null = new PasteListView(
-            localStoge,
-          ).getHTMLElement();
-          if (pasteListEl) {
-            ulComponent.childArray[0]?.before(pasteListEl);
-          }
+        document.body.classList.add("overflow-hidden");
+        const pasteListEl: HTMLElement | null = new PasteListView(
+          localStoge,
+        ).getHTMLElement();
+        const ulElement: HTMLElement | null = ulComponent.childArray[0];
+        if (pasteListEl && ulElement) {
+          ulElement.before(pasteListEl);
+        }
       });
     }
   }

@@ -11,6 +11,8 @@ import {
   getPercent,
 } from "../../../../../util/function/wheelFunction";
 import { AudioView } from "../audio/audio";
+import { shuffle } from "../../../../../util/function/shuffle";
+import { ResultPickerView } from "../picker-result/picker-result";
 
 interface ICoordinate {
   x: number;
@@ -58,6 +60,7 @@ export class WheelPickerView extends View {
     this.currentDeg = 0;
     this.pause = false;
     this.options = localStoge.validateOption();
+    this.configOptionList();
     this.setCanvasSize(300, 300);
     this.center = this.getCenter();
     const finishDeg: number = 360;
@@ -120,7 +123,7 @@ export class WheelPickerView extends View {
         this.ctx.textAlign = "center";
         this.ctx.fillStyle = WHEEL_PARAMS.COLORS.PRIMARY_COLOR;
         this.ctx.font = WHEEL_PARAMS.FONT.FONT;
-        this.ctx.fillText(this.options[i].option, 50, 10);
+        this.ctx.fillText(this.options[i].option, 50, 3);
         this.ctx.restore();
         this.drawWheel();
         this.drawTriangle(
@@ -142,21 +145,39 @@ export class WheelPickerView extends View {
           startDeg: startDeg,
           endDeg: endDeg,
         });
-        startDeg = endDeg;
-        // check winner
         if (
-          startDeg % 360 < 360 &&
-          startDeg % 360 > 270 &&
-          endDeg % 360 > 0 &&
-          endDeg % 360 < 90
+          startDeg % 360 < 270 &&
+          startDeg % 360 > 270 - this.step * parseInt(this.options[i].weight) &&
+          endDeg % 360 > 270 &&
+          endDeg % 360 < 270 + this.step * parseInt(this.options[i].weight)
         ) {
+          const wheel = this.viewComponent.getElement();
+          if (wheel) {
+            const result = wheel.previousElementSibling;
+            if (result) {
+              result.remove();
+              const newResult = new ResultPickerView().getHTMLElement();
+              if (newResult) {
+                newResult.textContent = this.options[i].option;
+                wheel.before(newResult);
+              }
+            }
+          }
         }
+        startDeg = endDeg;
       }
     }
   }
 
   private animate(maxRotation: number, audio: AudioView, overDiv: Element) {
     if (this.pause) {
+      const wheel = this.viewComponent.getElement();
+      if (wheel) {
+        const result = wheel.previousElementSibling;
+        if (result) {
+          result.classList.add("winner");
+        }
+      }
       return;
     }
     this.speed = easeOutSin(getPercent(this.currentDeg, maxRotation, 0)) * 25;
@@ -182,8 +203,6 @@ export class WheelPickerView extends View {
     this.draw();
     maxRotation = 360 * this.time - this.optionDegs[0].endDeg + 10;
     this.optionDegs = [];
-    console.log("max", maxRotation);
-    console.log(this.optionDegs);
     this.pause = false;
     window.requestAnimationFrame(() =>
       this.animate(maxRotation, audio, overDiv),
@@ -235,5 +254,14 @@ export class WheelPickerView extends View {
       }
     }
     return resultArr;
+  }
+
+  private configOptionList() {
+    shuffle(this.options);
+    this.options.forEach((option) => {
+      if (option.option.length > 7) {
+        option.option = option.option.substring(0, 7) + "...";
+      }
+    });
   }
 }
